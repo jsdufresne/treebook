@@ -1,6 +1,25 @@
-<h1>Listing statuses</h1>
+<div class="page-header">
+<h1>All of the Statuses</h1>
+</div>
 
-<table>
+<%= link_to "Post a New Status", new_status_path, class: "btn btn-success" %>
+
+<% @statuses.each do |status| %>
+<div class="status">
+<strong><%= status.name %></strong>
+<p><%= status.content %></p>
+<div class="meta">
+  <%= link_to time_ago_in_words(status.created_at) + " ago", status %>
+  <span class="admin">
+  | <%= link_to 'Edit', edit_status_path(status) %> |
+  <%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </span>
+</div>
+</div>
+<% end %>
+
+
+<!-- <table>
   <thead>
     <tr>
       <th>Name</th>
@@ -12,7 +31,7 @@
   </thead>
 
   <tbody>
-    <% @statuses.each do |status| %>
+<% @statuses.each do |status| %>
       <tr>
         <td><%= status.name %></td>
         <td><%= status.content %></td>
@@ -27,3 +46,4 @@
 <br>
 
 <%= link_to 'New Status', new_status_path %>
+ -->
